@@ -60,7 +60,8 @@ public class AcquirerController {
 	@Value("${error.origin.name}")
 	private String errorOriginName; 
 	
-	private RestTemplate rt = new RestTemplate();
+	@Autowired
+	private RestTemplate rt;
 
 	private final Log logger = LogFactory.getLog(this.getClass());
 	
@@ -131,7 +132,7 @@ public class AcquirerController {
 		completePaymentDTO.setAmount(transakcija.getAmount());
 		
 		
-		String url = "http://" + this.pccUrl + "/pccMain/completePaymentRequest";
+		String url = "https://" + this.pccUrl + "/pccMain/completePaymentRequest";
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -151,9 +152,8 @@ public class AcquirerController {
 				// failed url 
 				// failed due to...
 				logger.error("Payment #" + transakcija.getId() + " failed due to:" + e.getResponseBodyAsString());
-				compResponse = CompletePaymentResponseDTO.parse(e.getResponseBodyAsString());
 			}
-			
+			compResponse = CompletePaymentResponseDTO.parse(e.getResponseBodyAsString());
 			
 		}catch(Exception e) {
 			logger.error(e.getMessage(), e.getCause());
@@ -187,7 +187,7 @@ public class AcquirerController {
 		responseDTO.setSuccess(compResponse.getSuccess());
 		responseDTO.setTransactionIdMerchant(transakcija.getTransactionIdMerchant());
 		
-		url = "http://" + this.pcUrl + "/paymentConcentratorMain/completePaymentResponse";
+		url = "https://" + this.pcUrl + "/paymentConcentratorMain/completePaymentResponse";
 
 		HttpEntity<ResponseDTO> completePaymentResponse1= new HttpEntity<>(responseDTO);
 		

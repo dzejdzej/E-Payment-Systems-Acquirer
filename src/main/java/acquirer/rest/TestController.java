@@ -26,6 +26,7 @@ public class TestController {
 	
 	@PostConstruct
 	public void init() {
+		/*
 		Merchant merchant = new Merchant(); 
 		merchant.setIdMerchant("1234567891");
 		merchant.setPasswordMerchant("Password1");
@@ -43,6 +44,23 @@ public class TestController {
 		merchant = merchantRepository.save(merchant);
 		transakcija.setMerchant(merchant);
 		transakcijaRepository.save(transakcija);
+		*/
+		
+		Merchant merchant1 = new Merchant(); 
+		merchant1.setIdMerchant("1234567890");
+		merchant1.setPasswordMerchant("jdfakjfakjfa");
+		merchantRepository.save(merchant1);
+		
+		Merchant merchant2 = new Merchant(); 
+		merchant2.setIdMerchant("id1");
+		merchant2.setPasswordMerchant("password1");
+		merchantRepository.save(merchant2);
+		
+		Merchant merchant3 = new Merchant(); 
+		merchant3.setIdMerchant("id2");
+		merchant3.setPasswordMerchant("password2");
+		merchantRepository.save(merchant3);
+		
 		
 	}
 	
